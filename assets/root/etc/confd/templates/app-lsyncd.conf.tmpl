@@ -1,0 +1,29 @@
+settings {
+	statusFile = "/tmp/backup.lsyncd.stat",
+	logfile = "/tmp/lsyncd.log",
+        nodaemon = true,
+	statusInterval = 1,
+}
+
+sync {
+    default.rsync,
+    source    = {{getenv "SOURCE_TO_SYNC" (getv "/lsyncd/source" "/project")},
+    target    = {{getenv "TARGET‌_OF_SYNC" (getv "/lsyncd/target" "/Workspace")},
+    delay     = 1,
+}
+
+bash = {
+    delay = 5,
+    maxProcesses = 3,
+    onCreate = "cp -r ^sourcePathname ^targetPathname",
+    onModify = "cp -r ^sourcePathname ^targetPathname",
+    onDelete = "rm -rf ^targetPathname",
+--    onMove   = "mv ^o.targetPathname ^d.targetPathname",
+    onStartup = '[[ if [ "$(ls -A ^source)" ]; then cp -r ^source* ^target; fi]]',
+}
+
+-- sync = { default.direct,
+--       source="/home/khashayar/projects/snapp/snapp-docker",
+--       target="/home/khashayar/projects/snapp/snapp-docker/test",
+--       delay = 2,
+--}

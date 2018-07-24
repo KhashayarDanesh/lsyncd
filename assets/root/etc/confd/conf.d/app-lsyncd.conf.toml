@@ -1,0 +1,10 @@
+[template]
+src = "app-lsyncd.conf.tmpl"
+dest = "/etc/lsyncd/app-sync.lua"
+uid = 0
+gid = 0
+mode = "0644"
+keys = [
+  "lsyncd"
+]
+reload_cmd = "/etc/init.d/lsyncd reload"
