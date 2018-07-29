@@ -1,0 +1,16 @@
+#Sample Docker Compose
+version: '3.3'
+
+services:
+   lsyncd:
+     image: dockage/lsyncd
+     volumes:
+     - ./project:/Project
+     # when Source dir is added, lsyncd automatically creates target dir in case it doesn't exist
+     restart: always
+     environment:
+       LSYNCD_SYNC_SOURCE: /Project
+       LSYNCD_SYNC_TARGET: /Workspace
+       LSYNCD_SYNC_DELAY: 5
+       LSYNCD_SYNC_TARGET_OWNERSHIP: 600
+       LSYNCD_SYNC_TARGET_OWNER_AND_GROUP: "root:root"
