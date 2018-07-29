@@ -7,16 +7,15 @@ settings {
 
 sync {
     default.rsync,
-    source    = {{getenv "LSYNCD_SYNC_SOURCE" (getv "/lsyncd/sync/source" "/project")},
-    target    = {{getenv "LSYNCD_SYNC_TARGET" (getv "/lsyncd/sync/target" "/Workspace")},
-    delay     = 1,
+    source = {{getenv "LSYNCD_SYNC_SOURCE" (getv "/lsyncd/sync/source" "/Project")}},
+    target = {{getenv "LSYNCD_SYNC_TARGET" (getv "/lsyncd/sync/target" "/Workspace")}},
+    delay     = {{getenv "LSYNCD_SYNC_DELAY" (getv "/lsyncd/sync/delay" "1")}}, 
 }
 
 bash = {
     delay = 5,
     maxProcesses = 3,
-    onCreate = "cp -r ^sourcePathname ^targetPathname",
-    onModify = "cp -r ^sourcePathname ^targetPathname",
-    onDelete = "rm -rf ^targetPathname",
-    onStartup = '[[ if [ "$(ls -A ^source)" ]; then cp -r ^source* ^target; fi]]',
+    onCreate = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} ^targetPathname && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" getv ("/lsyncd/sync/target/ownerandgroup" "root:root" )}} ^targetPathname",
+    onModify = "chmod {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} && {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" getv ("/lsyncd/sync/target/ownerandgroup" "root:root" )}} ^targetPathname",
+    onStartup = "chmod {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} && {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" getv ("/lsyncd/sync/target/ownerandgroup" "root:root" )}} ^targetPathname",
 }

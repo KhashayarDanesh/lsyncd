@@ -1,6 +1,6 @@
 [template]
 src = "app-lsyncd.conf.tmpl"
-dest = "/etc/lsyncd/app-sync.lua"
+dest = "/etc/lsyncd/lsyncd.lua"
 uid = 0
 gid = 0
 mode = "0644"
