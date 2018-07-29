@@ -2,7 +2,9 @@
 ENVIRONMENT VARIABLES : 
 
 LSYNCD_SYNC_SOURCE (Type : Directory Address(string), Default : /Project )
+
 LSYNCD_SYNC_TARGET (Type : Directory Address(string), Default : /Workspace)
+
 LSYNCD_SYNC_DELAY (Type : Numeric(Seconds), Default : 1)
 
 (Warning : LSYNCD won't work untill SOURCE and TARGET Directories Exiist also keep in mind that LSYNCD Does not Create These Directories!)
