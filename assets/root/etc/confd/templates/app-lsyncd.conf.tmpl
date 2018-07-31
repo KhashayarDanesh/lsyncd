@@ -6,7 +6,7 @@ settings {
 }
 
 sync {
-    default.rsync,
+    dafault.direct,
     source = {{getenv "LSYNCD_SYNC_SOURCE" (getv "/lsyncd/sync/source" "/Project")}},
     target = {{getenv "LSYNCD_SYNC_TARGET" (getv "/lsyncd/sync/target" "/Workspace")}},
     delay     = {{getenv "LSYNCD_SYNC_DELAY" (getv "/lsyncd/sync/delay" "1")}}, 
