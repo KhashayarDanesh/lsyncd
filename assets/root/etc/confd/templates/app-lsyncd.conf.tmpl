@@ -5,17 +5,19 @@ settings {
 	statusInterval = 1,
 }
 
+{{$data := json (getenv "LSYNCD_JSON_CONF")}}
+{{range $data.syncblock}}
 sync {
-    dafault.direct,
-    source = {{getenv "LSYNCD_SYNC_SOURCE" (getv "/lsyncd/sync/source" "/Project")}},
-    target = {{getenv "LSYNCD_SYNC_TARGET" (getv "/lsyncd/sync/target" "/Workspace")}},
-    delay     = {{getenv "LSYNCD_SYNC_DELAY" (getv "/lsyncd/sync/delay" "1")}}, 
+   default.direct,
+   source = "{{.source}}",
+   target = "{{.target}}",
+   delay = {{getenv "LSYNCD_SYNC_DELAY" (getv "/lsyncd/sync/delay" "1")}},
 }
-
+{{end}}
 bash = {
     delay = 5,
     maxProcesses = 3,
-    onCreate = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} ^targetPathname && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" getv ("/lsyncd/sync/target/ownerandgroup" "root:root" )}} ^targetPathname",
-    onModify = "chmod {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} && {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" getv ("/lsyncd/sync/target/ownerandgroup" "root:root" )}} ^targetPathname",
-    onStartup = "chmod {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} && {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" getv ("/lsyncd/sync/target/ownerandgroup" "root:root" )}} ^targetPathname",
+    onCreate = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} ^targetPathname && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname",
+    onModify = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} ^targetPathname && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname",
+    onStartup = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} ^targetPathname && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname",
 }

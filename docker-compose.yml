@@ -6,11 +6,10 @@ services:
      image: dockage/lsyncd
      volumes:
      - ./project:/Project
+     - ./project2:/Project2
      # when Source dir is added, lsyncd automatically creates target dir in case it doesn't exist
      restart: always
      environment:
-       LSYNCD_SYNC_SOURCE: /Project
-       LSYNCD_SYNC_TARGET: /Workspace
-       LSYNCD_SYNC_DELAY: 5
-       LSYNCD_SYNC_TARGET_OWNERSHIP: 600
-       LSYNCD_SYNC_TARGET_OWNER_AND_GROUP: "root:root"
+             LSYNCD_JSON_CONF: '{"syncblock":[{"source":"/Project","target":"/project-sync"},{"source":"/Project2","target":"/project2-sync"}]}'
+             LSYNCD_SYNC_TARGET_OWNERSHIP: 600
+             LSYNCD_SYNC_TARGET_OWNER_AND_GROUP: "root:root"
