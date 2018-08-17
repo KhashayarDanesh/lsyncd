@@ -10,7 +10,7 @@ LSYNCD_JSON_CONF you can define many sync blocks as you want, configuration is w
 
 (Warning : LSYNCD won't work untill SOURCE  Directory(ies) Exist also keep in mind that LSYNCD creates the target Directory(ies))
 
-LSYNCD_SYNC_TARGET_OWNERSHIP (Type : Numeric, Format: UNIX Numeric (777, 600, 400, etc.), Default: 777)
+LSYNCD_SYNC_TARGET_OWNERSHIP (Type : Numeric, Format: UNIX Numeric (777, 600, 400, etc.), Default: 775)
 
 LSYNCD_SYNC_TARGET_OWNER_AND_GROUP (Type : String, Fromat : user:group, Default: root:root  )
 
