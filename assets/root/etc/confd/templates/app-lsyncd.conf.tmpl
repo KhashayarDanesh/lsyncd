@@ -1,6 +1,6 @@
 settings {
 	statusFile = "/tmp/backup.lsyncd.stat",
-	logfile = "/var/log/lsyncd.log",
+	logfile = "/dev/stdout",
         nodaemon = true,
 	statusInterval = 1,
 }
@@ -16,8 +16,8 @@ sync {
 {{end}}
 bash = {
     delay = 5,
-    maxProcesses = 3,
-    onCreate = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} ^targetPathname && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname",
-    onModify = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} ^targetPathname && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname",
-    onStartup = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "777")}} ^targetPathname && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname",
+    maxProcesses = 10,
+    onCreate = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "775")}} ^targetPathname/* && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname/*",
+    onModify = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "775")}} ^targetPathname/* && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname/*",
+    onStartup = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "775")}} ^targetPathname/* && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname/*",
 }
