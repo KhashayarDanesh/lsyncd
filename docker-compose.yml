@@ -11,5 +11,5 @@ services:
      restart: always
      environment:
              LSYNCD_JSON_CONF: '{"syncblock":[{"source":"/Project","target":"/project-sync"},{"source":"/Project2","target":"/project2-sync"}]}'
-             LSYNCD_SYNC_TARGET_OWNERSHIP: 600
+             LSYNCD_SYNC_TARGET_OWNERSHIP: 775
              LSYNCD_SYNC_TARGET_OWNER_AND_GROUP: "root:root"
