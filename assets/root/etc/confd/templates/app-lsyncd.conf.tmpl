@@ -17,7 +17,7 @@ sync {
 bash = {
     delay = 5,
     maxProcesses = 10,
-    onCreate = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "775")}} ^targetPathname/* && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname/*",
-    onModify = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "775")}} ^targetPathname/* && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname/*",
-    onStartup = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "775")}} ^targetPathname/* && chown -R {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname/*",
+    onCreate = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "775")}} ^targetPathname/ && chown -hR {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname/",
+    onModify = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "775")}} ^targetPathname/ && chown -hR {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname/",
+    onStartup = "chmod -R {{getenv "LSYNCD_SYNC_TARGET_OWNERSHIP" (getv "/lsyncd/sync/target/ownership" "775")}} ^targetPathname/ && chown -hR {{getenv "LSYNCD_SYNC_TARGET_OWNER_AND_GROUP" (getv "/lsyncd/sync/target/ownerandgroup" "root:root")}} ^targetPathname/",
 }
