@@ -9,4 +9,5 @@ LABEL org.label-schema.name="lsyncd" \
 
 COPY assets/root/ /
 
-RUN apk --no-cache --update add lsyncd
+RUN apk --no-cache --update add lsyncd \
+	&& c-update add lsyncd default
